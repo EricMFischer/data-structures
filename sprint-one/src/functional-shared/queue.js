@@ -1,32 +1,33 @@
 var Queue = function(){
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
-  var queueInst = {
-  	length: 0,
+  var someInst = {
     storage: {},
-    start: 0
+    start: -1,
+  	end: -1,
   };
 
-  _.extend(queueInst, queueMethods);
-  return queueInst;
+  _.extend(someInst, queueMethods);
+  return someInst;
 };
 
-var queueMethods = {
-	enqueue: function(value) {
-		this.length++;
-		this.storage[this.length] = value;
-	},
-	dequeue: function() {
-		this.start++;
-		// this.length--;
-		//return this.storage[this.length - this.start + 1];
-		return this.storage[this.start];
-	},
-  size: function() {
-    if (this.length - this.start <= 0) {
-      // Do nothing... for now...
-      return 0;
-    }
-    return this.length - this.start;
+var queueMethods = {};
+
+queueMethods.enqueue = function(value) {
+	this.end++;
+	this.storage[this.end] = value;
+};
+
+queueMethods.dequeue = function() {
+	this.start++;
+	var result = this.storage[this.start];
+  delete this.storage[this.start];
+  return result;
+};
+
+queueMethods.size = function() {
+  if (this.end - this.start <= 0) {
+    return 0;
   }
+  return this.end - this.start;
 };

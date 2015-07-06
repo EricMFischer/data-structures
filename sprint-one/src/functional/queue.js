@@ -1,32 +1,31 @@
 var Queue = function(){
-  var someInstance = {};
+  var someInst = {};
 
   // Use an object with numeric keys to store values
   var storage = {};
-  var end = -1;
   var start = -1;
-  // Implement the methods below
+  var end = -1;
 
-  someInstance.enqueue = function(value){
-    end++; // enqueue increments our length
+  someInst.enqueue = function(value){
+    end++;
     storage[end] = value;
   };
 
-  someInstance.dequeue = function(){
+  someInst.dequeue = function(){
     start++; // increments our start (bc something has just been dequeued)
     var result = storage[start];
     delete storage[start];
     return result;
   };
 
-  someInstance.size = function(){
-    if (end-start <= 0) {
+  someInst.size = function(){
+    if (end - start <= 0) {
       return 0;
     }
-    return end-start;
+    return end - start;
   };
 
-  return someInstance;
+  return someInst;
 };
 
 /*
