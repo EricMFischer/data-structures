@@ -1,39 +1,62 @@
 var BinarySearchTree = function(value){
-	var myTree = {};
-	myTree.root = value;
-	myTree.left = null;
-	myTree.right = null;
 
-	_.extend(myTree, BinarySearchTreeMethods);
-	return myTree;
+  var binaryTree = Object.create(binaryTreePrototype);
+  binaryTree.value = value;
+  binaryTree.left = null;
+  binaryTree.right = null;
+  return binaryTree;
 };
 
-var BinarySearchTreeMethods = {
-	insert: function(value) {
-		// everytime you insert a new node, set that node to the new root value
-		if (value < this.root) {
-	    if (this.left === null) {
-				this.left = BinarySearchTree(value);
-			} else {
-				this.left.insert(value);
-			}
-		}
-		if (value > this.root) {
-			if (this.right === null) {
-				this.right = BinarySearchTree(value);
-			} else {
-				this.right.insert(value);
-			}
-		}
-	},
-	contains: function() {
+var binaryTreePrototype = {};
 
-	},
-	depthFirstLog: function() {
+binaryTreePrototype.insert = function(val){
+  if (val < this.value) {
+    if (this.left === null) {
+      this.left = BinarySearchTree(val);
+    } else {
+      this.left.insert(val);
+    }
+  } else if (val > this.value) {
+    if (this.right === null) {
+      this.right = BinarySearchTree(val);
+    } else {
+      this.right.insert(val);
+    }
+  } else {
+    return "The tree already contains this value.";
+  }
+};
 
-	}
-}
+binaryTreePrototype.contains = function(val){
+  if (val === this.value){
+    return true;
+  } else if (val < this.value) {
+    if (!this.left){
+      return false;
+    } else {
+      return this.left.contains(val);
+    }
+  } else if (val > this.value) {
+    if(!this.right){
+      return false;
+    } else {
+      return this.right.contains(val);
+    }
+  }
+};
 
+binaryTreePrototype.depthFirstLog = function(callBack){
+  callBack(this.value);
+  if (this.left){
+    this.left.depthFirstLog(callBack);
+  }
+  if (this.right){
+    this.right.depthFirstLog(callBack);
+  }
+};
+
+
+/*
 var newTree = BinarySearchTree(5);
 BinarySearchTree.insert(3);
 BinarySearchTree.insert(2);
@@ -42,13 +65,14 @@ BinarySearchTree.insert(2);
 
 // NEW FUNCTION TIME!
 // Node constructor with 3 properties
-	// create new node obj	
-		// value
-		// left
-		// right
-	// return our obj!
+// 	create new node obj	
+// 		value
+// 		left
+// 		right
+// 	return our obj!
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+ 
