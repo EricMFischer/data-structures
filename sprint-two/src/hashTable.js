@@ -1,4 +1,5 @@
 var HashTable = function(){
+  this._size = 0;
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
 };
@@ -27,12 +28,8 @@ HashTable.prototype.retrieve = function(k){
     }
   }
       // Iterate through each toople
-        // Find where [0] === k
+        // Find where [i][x][0] === k
         // Return v
-
-
-  // Return value associated with k.
-  // return this._storage[i][1];
 };
 
 HashTable.prototype.remove = function(k){
@@ -45,13 +42,11 @@ HashTable.prototype.remove = function(k){
   }
 };
 
-
-
 /*
  * Complexity: What is the time complexity of the above functions?
  */
 
-
+/*
  var myTable = new HashTable();
  myTable.insert('val1','val1');
  myTable.insert('val2','val2');
