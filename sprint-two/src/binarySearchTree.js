@@ -10,11 +10,20 @@ var BinarySearchTree = function(value){
 
 var BinarySearchTreeMethods = {
 	insert: function(value) {
+		// everytime you insert a new node, set that node to the new root value
 		if (value < this.root) {
-			this.left = BinarySearchTree(value);
+	    if (this.left === null) {
+				this.left = BinarySearchTree(value);
+			} else {
+				this.left.insert(value);
+			}
 		}
 		if (value > this.root) {
-			this.right = BinarySearchTree(value);
+			if (this.right === null) {
+				this.right = BinarySearchTree(value);
+			} else {
+				this.right.insert(value);
+			}
 		}
 	},
 	contains: function() {
@@ -24,6 +33,11 @@ var BinarySearchTreeMethods = {
 
 	}
 }
+
+var newTree = BinarySearchTree(5);
+BinarySearchTree.insert(3);
+BinarySearchTree.insert(2);
+
 
 
 // NEW FUNCTION TIME!

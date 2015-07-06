@@ -12,13 +12,6 @@ var Queue = function(){
 };
 
 var queueMethods = {
-	size: function() {
-		if (this.length - this.start <= 0) {
-			// Do nothing... for now...
-			return 0;
-		}
-		return this.length - this.start;
-	},
 	enqueue: function(value) {
 		this.length++;
 		this.storage[this.length] = value;
@@ -28,5 +21,12 @@ var queueMethods = {
 		// this.length--;
 		//return this.storage[this.length - this.start + 1];
 		return this.storage[this.start];
-	}
+	},
+  size: function() {
+    if (this.length - this.start <= 0) {
+      // Do nothing... for now...
+      return 0;
+    }
+    return this.length - this.start;
+  }
 };
