@@ -9,48 +9,44 @@ var Tree = function(value){
 };
 
 
-
-
-
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
-	this.children.push(Tree(value));
+	var child = Tree(value);
+	this.children.push(child);
 };
 
 treeMethods.contains = function(target){
 	var found = false;
-	if (this.value === target) {
-		found = true;
+	var subroutine = function(node) {
+		if (node.value === target) {
+		  found = true;
+		  return;
+	  }
+	  for (var i=0; i<node.children.length; i++) {
+	  	var child = node.children[i];
+		  subroutine(child);
+	  }
 	}
-	for (var i=0; i<this.children.length; i++) {
-		if (this.children[i].contains(target)) {
-			found = true;
-		}
-	}
-		// return false;
-	// if (this.children[0].value === target) {
-	// 	return true;
-	// }
-	// var found = false;
-	// var targetFinder = function(node) {
-	// 	if (this.value === target) {
-	// 	    found = true;
-	// 	}
-	// 	for (var i=0; i<node.length; i++) {
-	// 		targetFinder(this.children);
-	// 	}
-	// }
-	// targetFinder(this.children);
-	// return found;
+	subroutine(this);
 	return found;
-
 };
 
+treeMethods.traverse = function(callback){
+  callback(this.value);
+
+  if (!this.children){ return; }
+  for (var i = 0; i < this.children.length; i++){
+    var child = this.children[i];
+    debugger;
+    child.traverse(callback);
+  }
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?
  
+Previous work:
 
 treeMethods.contains = function(target){
 	var found = false;
@@ -65,8 +61,5 @@ treeMethods.contains = function(target){
 	}
 	targetFinder(this.children);
 };
-
-
-
 
  */
