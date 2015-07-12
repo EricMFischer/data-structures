@@ -1,24 +1,21 @@
 var Queue = function(){
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
-  var someInst = {
-    storage: {},
-    start: -1,
-  	end: -1,
-  };
-
-  _.extend(someInst, queueMethods);
+  var someInst = {};
+  someInst.storage = {};
+  someInst.start = -1;
+  someInst.end = -1;
+  extend(someInst, queueMethods);
+  
   return someInst;
 };
 
 var queueMethods = {};
 
-queueMethods.enqueue = function(value) {
+queueMethods.enqueue = function(value) {  // add to back
 	this.end++;
 	this.storage[this.end] = value;
 };
 
-queueMethods.dequeue = function() {
+queueMethods.dequeue = function() {  // remove from front
 	this.start++;
 	var result = this.storage[this.start];
   delete this.storage[this.start];

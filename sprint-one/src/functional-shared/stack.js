@@ -1,36 +1,34 @@
 var Stack = function() {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
-  var someInst = {
-  	length: 0,
-  	storage: {}
-  };
-  extend(someInst, stackMethods);
+  var someInst = {};
+  someInst.storage = {};
+  someInst._size = 0;
+  _.extend(someInst, stackMethods);
+
   return someInst;
 };
 
 var stackMethods = {};
 
 stackMethods.push = function(value) {
-	this.storage[this.length] = value;
-  this.length++;
+	this.storage[this._size] = value;
+  this._size++;
 };
 
 stackMethods.pop = function() {
-	if (this.length <= 0) {
-		return 0;
-	}
-	this.length--;
-	var result = this.storage[this.length];
-  delete this.storage[this.length];
+	this._size--;
+	var result = this.storage[this._size];
+  delete this.storage[this._size];
   return result;
 };
 
 stackMethods.size = function() {
-  return this.length;
+  if (this._size <= 0) {
+    return 0;
+  }
+  return this._size;
 };
 
-
+// Example of extend
 var extend = function(to, from) {
 	for (var key in from) {
 		to[key] = from[key];

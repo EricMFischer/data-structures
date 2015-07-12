@@ -16,9 +16,9 @@ var Stack = function(){
       return 0;
     }
     size--;
-    var result = storage[size];
+    var removed = storage[size];
     delete storage[size];
-    return result;
+    return removed;
   };
 
   someInst.size = function(){
