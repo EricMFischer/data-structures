@@ -1,5 +1,4 @@
 var BinarySearchTree = function(value){
-
   var binaryTree = Object.create(binaryTreePrototype);
   binaryTree.value = value;
   binaryTree.left = null;
@@ -9,7 +8,7 @@ var BinarySearchTree = function(value){
 
 var binaryTreePrototype = {};
 
-binaryTreePrototype.insert = function(val){
+binaryTreePrototype.insert = function(val){ 
   if (val < this.value) {
     if (this.left === null) {
       this.left = BinarySearchTree(val);
@@ -44,8 +43,8 @@ binaryTreePrototype.contains = function(val){
     }
   }
 };
-
-binaryTreePrototype.depthFirstLog = function(callBack){
+// executes callback on every value contained in tree
+binaryTreePrototype.depthFirstLog = function(callBack) {
   callBack(this.value);
   if (this.left){
     this.left.depthFirstLog(callBack);
@@ -55,24 +54,13 @@ binaryTreePrototype.depthFirstLog = function(callBack){
   }
 };
 
-
 /*
+All methods have logarithmic time complexity, or O(log(n)).
+
 var newTree = BinarySearchTree(5);
 BinarySearchTree.insert(3);
 BinarySearchTree.insert(2);
 
-
-
-// NEW FUNCTION TIME!
-// Node constructor with 3 properties
-// 	create new node obj	
-// 		value
-// 		left
-// 		right
-// 	return our obj!
-
-
 /*
  * Complexity: What is the time complexity of the above functions?
  */
- 
