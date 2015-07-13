@@ -1,65 +1,43 @@
 var Tree = function(value){
   var newTree = {};
   newTree.value = value;
-
-  // your code here
-  newTree.children = []; // fix me
+  newTree.children = [];
   _.extend(newTree, treeMethods);
   return newTree;
 };
 
-
 var treeMethods = {};
 
-treeMethods.addChild = function(value){
+treeMethods.addChild = function(value){ // adds node as child of tree (constant time)
 	var child = Tree(value);
 	this.children.push(child);
 };
 
-treeMethods.contains = function(target){
+treeMethods.contains = function(target){ // linear time
 	var found = false;
-	var subroutine = function(node) {
+	var targetFinder = function(node) {
 		if (node.value === target) {
 		  found = true;
 		  return;
 	  }
 	  for (var i=0; i<node.children.length; i++) {
 	  	var child = node.children[i];
-		  subroutine(child);
+		  targetFinder(child);
 	  }
 	}
-	subroutine(this);
-	return found;
+	targetFinder(this); // this === the root
+	return found; // has to be outside targetFinder
 };
 
-treeMethods.traverse = function(callback){
-  callback(this.value);
-
-  if (!this.children){ return; }
+treeMethods.traverse = function(callback){ // linear time
+  callback(this.value); // performs callback on every value
+  if (!this.children){return;}
   for (var i = 0; i < this.children.length; i++){
     var child = this.children[i];
-    debugger;
     child.traverse(callback);
   }
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
- 
-Previous work:
-
-treeMethods.contains = function(target){
-	var found = false;
-	var targetFinder = function(node) {
-		if (this.value === target) {
-		    found = true;
-		}
-		for (var i=0; i<node.children.length; i++) {
-			found = targetFinder(node);
-		}
-		return found;
-	}
-	targetFinder(this.children);
-};
-
  */
