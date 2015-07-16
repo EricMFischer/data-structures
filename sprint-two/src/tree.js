@@ -15,6 +15,7 @@ treeMethods.addChild = function(value){ // adds node as child of tree (constant 
 
 treeMethods.contains = function(target){ // linear time
 	var found = false;
+  
 	var targetFinder = function(node) {
 		if (node.value === target) {
 		  found = true;
