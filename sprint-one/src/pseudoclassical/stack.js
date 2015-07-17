@@ -1,25 +1,21 @@
 var Stack = function() {
   this.storage = {};
-  this._size = 0;
-};
+  this.length = 0;
+}
 
 Stack.prototype.push = function(value) {
-	this.storage[this._size] = value;
-  this._size++;
-};
+  this.storage[this.length] = value;
+  this.length++;
+}
 
 Stack.prototype.pop = function() {
-	this._size--;
-	var result = this.storage[this._size];
-  delete this.storage[this._size];
-  return result;
-};
+  this.length--;
+  var value = this.storage[this.length];
+  delete this.storage[this.length];
+  return value;
+}
 
 Stack.prototype.size = function() {
-	if (this._size <= 0) {
-		return 0;
-	}
-	return this._size;
-};
-
-// Stack.prototype.constructor = Stack;
+  if (this.length < 0) {return 0;}
+  return this.length;
+}
