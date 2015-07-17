@@ -1,31 +1,28 @@
 var Stack = function(){
-  var someInst = {};
+  var someInstance = {}; // functional: instantiates an object for us
 
   // Use an object with numeric keys to store values
   var storage = {};
-  var size = 0;
+  var length = 0;
 
-  // Implement the methods below
-  someInst.push = function(value){
-    storage[size] = value;
-    size++;
+  someInstance.push = function(value){
+    storage[length] = value;
+    length++; // needs to after, e.g. if length is 3, you want to push in at position [3], not [4]
   };
 
-  someInst.pop = function(){
-    if (size <= 0) {
-      return 0;
-    }
-    size--;
-    var removed = storage[size];
-    delete storage[size];
-    return removed;
+  someInstance.pop = function(){
+    length--; // needs to go before, e.g. length may be 3, but that means you want to remove at position [2]
+    var result = storage[length];
+    delete storage[length];
+    return result;
   };
 
-  someInst.size = function(){
-    return size;
+  someInstance.size = function(){
+    if (length < 0) {return 0;}
+    return length;
   };
 
-  return someInst;
+  return someInstance;
 };
 
 /*

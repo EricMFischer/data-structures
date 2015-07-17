@@ -1,31 +1,30 @@
 var Queue = function(){
-  var someInst = {};
+  var someInstance = {}; // functional: instantiates an object for us
 
   // Use an object with numeric keys to store values
   var storage = {};
   var start = -1;
   var end = -1;
+  // start and end --> called diff things, but ultimately both get incremented
+  // as a result of enqueuing and dequeuing, respectively
 
-  someInst.enqueue = function(value){ // add to the back
+  someInstance.enqueue = function(value){ // add to back
     end++;
     storage[end] = value;
   };
 
-  someInst.dequeue = function(){ // remove from the front
+  someInstance.dequeue = function(){ // remove from front
     start++;
     var result = storage[start];
     delete storage[start];
     return result;
   };
 
-  someInst.size = function(){
-    if (end - start <= 0) {
-      return 0;
-    }
+  someInstance.size = function(){
+    if (end - start < 0) {return 0;}
     return end - start;
   };
-
-  return someInst;
+  return someInstance;
 };
 
 /*
