@@ -1,27 +1,25 @@
 var Stack = function() {
-  var someInst = Object.create(stackMethods);
-  someInst.storage = {};
-  someInst._size = 0;
-  return someInst;
+  var someInstance = Object.create(stackMethods);
+  someInstance.length = 0;
+  someInstance.storage = {};
+  return someInstance;
 };
 
 var stackMethods = {};
 
 stackMethods.push = function(value) {
-  this.storage[this._size] = value;
-  this._size++;
-};
+  this.storage[this.length] = value;
+  this.length++;
+}
 
 stackMethods.pop = function() {
-	this._size--;
-	var result = this.storage[this._size];
-  delete this.storage[this._size];
-  return result;
-};
+  this.length--;
+  var value = this.storage[this.length];
+  delete this.storage[this.length];
+  return value;
+}
 
 stackMethods.size = function() {
-	if (this._size <= 0) {
-		return 0;
-	}
-	return this._size;
-};
+  if (this.length < 0) {return 0;}
+  return this.length; 
+}
